@@ -14,8 +14,7 @@ ROCNIKY = [1, 2, 3, 4, 5]
 st.set_page_config(page_title="Studenti")
 naplnit_ukazkova_data()
 
-# Který student je otevřený v detailu (None = žádný, zobrazí se seznam).
-# session_state si hodnotu pamatuje i po kliknutí na tlačítko.
+
 if "vybrany_id" not in st.session_state:
     st.session_state.vybrany_id = None
 
@@ -39,7 +38,7 @@ def stranka_seznam():
     with sloupec2:
         vyber_program = st.selectbox("Studijní program", ["Vše"] + PROGRAMY)
 
-    # "Vše" = filtr se nepoužije (None)
+    
     rocnik = None if vyber_rocnik == "Vše" else vyber_rocnik
     program = None if vyber_program == "Vše" else vyber_program
 
@@ -49,10 +48,9 @@ def stranka_seznam():
     if not studenti:
         st.info("Žádný student neodpovídá filtru.")
     for s in studenti:
-        # key musí být u každého tlačítka jiný, proto id studenta
         if st.button(f"{s.prijmeni} {s.jmeno}", key=f"student_{s.id}"):
             st.session_state.vybrany_id = s.id
-            st.rerun()  # spustí skript znovu, teď už se zobrazí detail
+            st.rerun()
 
 
 def stranka_detail(student_id):
@@ -115,7 +113,6 @@ def stranka_pridat():
             st.success(f"Student {jmeno} {prijmeni} byl přidán.")
 
 
-# --- Navigace v postranním panelu ---
 stranka = st.sidebar.radio("Menu", ["Seznam studentů", "Přidat studenta"])
 
 if stranka == "Přidat studenta":
