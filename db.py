@@ -63,7 +63,7 @@ def uprav_studenta(student_id, jmeno, prijmeni, email, rocnik, program):
 
 def naplnit_ukazkova_data():
     """Když je databáze prázdná, vloží ukázkové studenty."""
-    if najdi_studenty():   # v databázi už někdo je -> nic nedělat
+    if najdi_studenty():
         return
     ukazkovi = [
         ("Jana", "Nováková", "jana.novakova@example.com", 3, PROGRAMY[0]),
